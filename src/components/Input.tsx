@@ -7,9 +7,9 @@ interface InputProps {
 
 function Input({ type = 'text', placeholder, value, onChange }: InputProps) {
   return (
-    <input 
-      type={type} 
-      placeholder={placeholder} 
+    <input
+      type={type}
+      placeholder={placeholder}
       style={{ padding: '10px', fontSize: '16px' }}
       value={value}
       onChange={onChange}
@@ -18,4 +18,3 @@ function Input({ type = 'text', placeholder, value, onChange }: InputProps) {
 }
 
 export default Input;
-
