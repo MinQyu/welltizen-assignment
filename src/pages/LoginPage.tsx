@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import Input from '../components/Input';
+import Button from '../components/Button';
 import { useState } from 'react';
 
 function LoginPage() {
@@ -44,16 +45,19 @@ function LoginPage() {
       >
         Login Page
       </h1>
-      <h2>SHOP 101</h2>
       <form
         onSubmit={handleLogin}
         style={{
           display: 'flex',
           flexDirection: 'column',
           gap: '10px',
-          width: '300px',
+          width: '400px',
+          padding: '30px 20px',
+          borderRadius: '20px',
+          boxShadow: '1px 4px 8px rgba(0, 0, 0, 0.2)',
         }}
       >
+        <h2 style={{ textAlign: 'center' }}>SHOP 101</h2>
         <Input
           type='text'
           placeholder='아이디'
@@ -66,20 +70,7 @@ function LoginPage() {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <button
-          type='submit'
-          style={{
-            padding: '10px',
-            fontSize: '16px',
-            backgroundColor: '#007bff',
-            color: 'white',
-            border: 'none',
-            borderRadius: '4px',
-            cursor: 'pointer',
-          }}
-        >
-          로그인
-        </button>
+        <Button type='submit'>로그인</Button>
       </form>
     </div>
   );
