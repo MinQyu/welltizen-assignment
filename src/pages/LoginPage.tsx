@@ -9,12 +9,35 @@ function LoginPage() {
   const [id, setId] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleLogin = (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (id === 'test' && password === 'test') {
+    try {
+      const response = await fetch('http://localhost:3000/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          username: id,
+          password: password,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        alert(data.message || '로그인 실패');
+        return;
+      }
+
+      // JWT와 사용자 정보 저장
+      localStorage.setItem('token', data.token);
+      localStorage.setItem('user', JSON.stringify(data.user));
+
       navigate('/home');
-    } else {
-      alert('아이디 또는 비밀번호가 일치하지 않습니다.');
+    } catch (error) {
+      console.error(error);
+      alert('서버와 통신 중 오류가 발생했습니다.');
     }
   };
 
