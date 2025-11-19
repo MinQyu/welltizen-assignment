@@ -10,6 +10,13 @@
  * ---------------------------------------------------------------
  */
 
+export interface Product {
+  id?: number;
+  name?: string;
+  description?: string;
+  price?: number;
+}
+
 export type QueryParamsType = Record<string | number, any>;
 export type ResponseFormat = keyof Omit<Body, "body" | "bodyUsed">;
 

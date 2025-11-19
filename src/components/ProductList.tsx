@@ -1,4 +1,4 @@
-import type { Product } from '../types/type';
+import type { Product } from '../api/api';
 
 interface ProductListProps {
   products: Product[];

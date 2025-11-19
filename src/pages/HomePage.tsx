@@ -3,7 +3,7 @@ import ProductList from '../components/ProductList';
 import ProductModal from '../components/ProductModal';
 import Modal from '../components/Modal';
 import Button from '../components/Button';
-import type { Product } from '../types/type';
+import type { Product } from '../api/api';
 
 function HomePage() {
   const [isModalOpen, setIsModalOpen] = useState(false);

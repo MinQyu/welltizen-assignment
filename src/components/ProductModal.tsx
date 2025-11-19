@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import Input from './Input';
 import Button from './Button';
-import type { Product } from '../types/type';
+import type { Product } from '../api/api';
 
 interface ProductModalProps {
   product?: Product;
