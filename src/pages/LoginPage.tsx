@@ -2,6 +2,8 @@ import { useNavigate } from 'react-router-dom';
 import Input from '../components/Input';
 import Button from '../components/Button';
 import { useState } from 'react';
+import { apiClient } from '../api/apiClient';
+import { ContentType } from '../api/api';
 
 function LoginPage() {
   const navigate = useNavigate();
@@ -11,33 +13,27 @@ function LoginPage() {
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
+
     try {
-      const response = await fetch('http://localhost:3000/login', {
+      const response = await apiClient.request<{
+        token: string;
+        user: {
+          id: number;
+          username: string;
+        };
+      }>({
+        path: '/login',
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          username: id,
-          password: password,
-        }),
+        body: { username: id, password },
+        type: ContentType.Json,
+        format: 'json',
       });
 
-      const data = await response.json();
-
-      if (!response.ok) {
-        alert(data.message || '로그인 실패');
-        return;
-      }
-
-      // JWT와 사용자 정보 저장
-      localStorage.setItem('token', data.token);
-      localStorage.setItem('user', JSON.stringify(data.user));
-
+      localStorage.setItem('token', response.data.token);
+      localStorage.setItem('user', JSON.stringify(response.data.user));
       navigate('/home');
-    } catch (error) {
-      console.error(error);
-      alert('서버와 통신 중 오류가 발생했습니다.');
+    } catch (error: any) {
+      alert(error?.error?.message || error?.message || '로그인 실패');
     }
   };
 
